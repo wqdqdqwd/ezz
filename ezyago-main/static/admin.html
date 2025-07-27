@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezyago Admin Panel</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Admin Panel yükleniyor...</p>
+        </div>
+    </div>
+
+    <!-- Admin Login -->
+    <div id="admin-login" class="admin-login">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="brand">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Ezyago Admin</span>
+                </div>
+                <h1>Yönetici Girişi</h1>
+                <p>Sisteme erişim için giriş yapın</p>
+            </div>
+            
+            <form id="admin-login-form" class="login-form">
+                <div class="form-group">
+                    <label for="admin-email">E-posta:</label>
+                    <input type="email" id="admin-email" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="admin-password">Şifre:</label>
+                    <input type="password" id="admin-password" class="form-input" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Giriş Yap
+                </button>
+                
+                <div id="login-error" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="admin-dashboard" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Ezyago Admin</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="users">
+                    <i class="fas fa-users"></i>
+                    <span>Kullanıcılar</span>
+                </a>
+                <a href="#" class="nav-item" data-page="payments">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Ödemeler</span>
+                </a>
+                <a href="#" class="nav-item" data-page="bots">
+                    <i class="fas fa-robot"></i>
+                    <span>Bot Durumu</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Ayarlar</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn btn-outline btn-full" onclick="adminLogout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Çıkış Yap
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="admin-info">
+                        <div class="admin-avatar">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="admin-details">
+                            <span class="admin-name">Admin</span>
+                            <span class="admin-email" id="admin-email-display">bilwininc@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="admin-content">
+                <!-- Dashboard Page -->
+                <div id="dashboard-page" class="page active">
+                    <!-- Stats Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon users">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="total-users">0</h3>
+                                <p>Toplam Kullanıcı</p>
+                                <span class="stat-change" id="users-change">+0 bu ay</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon subscribers">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="active-subscribers">0</h3>
+                                <p>Aktif Abone</p>
+                                <span class="stat-change" id="subscribers-change">+0 bu ay</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon revenue">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="total-revenue">$0</h3>
+                                <p>Toplam Gelir</p>
+                                <span class="stat-change" id="revenue-change">+$0 bu ay</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon bots">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="active-bots">0</h3>
+                                <p>Aktif Bot</p>
+                                <span class="stat-change" id="bots-change">Şu anda</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <h2>Hızlı İşlemler</h2>
+                        <div class="actions-grid">
+                            <button class="action-btn" onclick="navigateToPage('payments')">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Bekleyen Ödemeler</span>
+                                <div class="badge" id="pending-payments-badge">0</div>
+                            </button>
+                            <button class="action-btn" onclick="navigateToPage('users')">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Yeni Kullanıcılar</span>
+                            </button>
+                            <button class="action-btn" onclick="refreshAllData()">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>Verileri Yenile</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="recent-activity">
+                        <h2>Son Aktiviteler</h2>
+                        <div class="activity-list" id="recent-activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Sistem başlatıldı</p>
+                                    <span class="activity-time">Az önce</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Page -->
+                <div id="users-page" class="page">
+                    <div class="page-header">
+                        <h2>Kullanıcı Yönetimi</h2>
+                        <div class="page-actions">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="user-search" placeholder="Kullanıcı ara...">
+                            </div>
+                            <button class="btn btn-primary" onclick="refreshUsers()">
+                                <i class="fas fa-sync-alt"></i>
+                                Yenile
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="users-table-container">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th>Kullanıcı</th>
+                                    <th>Abonelik</th>
+                                    <th>Bot Durumu</th>
+                                    <th>Kayıt Tarihi</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <tr>
+                                    <td colspan="5" class="loading-row">
+                                        <div class="table-loading">
+                                            <div class="spinner-sm"></div>
+                                            <span>Kullanıcılar yükleniyor...</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Payments Page -->
+                <div id="payments-page" class="page">
+                    <div class="page-header">
+                        <h2>Ödeme Yönetimi</h2>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="refreshPayments()">
+                                <i class="fas fa-sync-alt"></i>
+                                Yenile
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="payments-container">
+                        <div class="pending-payments">
+                            <h3>Bekleyen Ödemeler</h3>
+                            <div id="pending-payments-list" class="payments-list">
+                                <div class="loading-item">
+                                    <div class="spinner-sm"></div>
+                                    <span>Ödemeler yükleniyor...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bots Page -->
+                <div id="bots-page" class="page">
+                    <div class="page-header">
+                        <h2>Bot Durumu</h2>
+                        <div class="page-actions">
+                            <button class="btn btn-primary" onclick="refreshBots()">
+                                <i class="fas fa-sync-alt"></i>
+                                Yenile
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bots-grid" id="bots-grid">
+                        <div class="loading-item">
+                            <div class="spinner-sm"></div>
+                            <span>Bot durumları yükleniyor...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="settings-page" class="page">
+                    <div class="page-header">
+                        <h2>Sistem Ayarları</h2>
+                    </div>
+
+                    <div class="settings-container">
+                        <div class="settings-card">
+                            <h3>Ödeme Ayarları</h3>
+                            <div class="form-group">
+                                <label for="usdt-wallet">USDT Cüzdan Adresi:</label>
+                                <input type="text" id="usdt-wallet" class="form-input" placeholder="USDT cüzdan adresi">
+                            </div>
+                            <div class="form-group">
+                                <label for="subscription-price">Aylık Abonelik Ücreti (USDT):</label>
+                                <input type="number" id="subscription-price" class="form-input" value="10" min="1">
+                            </div>
+                            <button class="btn btn-primary" onclick="saveSettings()">
+                                <i class="fas fa-save"></i>
+                                Kaydet
+                            </button>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Sistem Bilgileri</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="label">Platform:</span>
+                                    <span class="value">Ezyago v1.0.0</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Sunucu:</span>
+                                    <span class="value">Render.com</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Veritabanı:</span>
+                                    <span class="value">Firebase Realtime DB</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Son Güncelleme:</span>
+                                    <span class="value" id="last-update">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Onay</h3>
+                <button class="modal-close" onclick="closeConfirmationModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modal-message">Bu işlemi gerçekleştirmek istediğinizden emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeConfirmationModal()">İptal</button>
+                <button class="btn btn-primary" id="modal-confirm-btn" onclick="confirmAction()">Onayla</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add IP Modal -->
+    <div id="add-ip-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>IP Adresi Ekle</h3>
+                <button class="modal-close" onclick="closeAddIPModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add-ip-form">
+                    <div class="form-group">
+                        <label for="ip-address">IP Adresi:</label>
+                        <input type="text" id="ip-address" class="form-input" placeholder="192.168.1.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ip-description">Açıklama:</label>
+                        <input type="text" id="ip-description" class="form-input" placeholder="Render.com sunucu IP'si" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-plus"></i>
+                        IP Ekle
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/admin.js"></script>
+</body>
+</html>

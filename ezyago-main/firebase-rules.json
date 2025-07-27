@@ -1,0 +1,185 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    
+    "users": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid || root.child('users').child(auth.uid).child('role').val() === 'admin'",
+        ".validate": "newData.hasChildren(['uid', 'email', 'full_name', 'created_at'])",
+        
+        "uid": {
+          ".validate": "newData.isString() && newData.val() === $uid"
+        },
+        "email": {
+          ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$/)"
+        },
+        "full_name": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "password_hash": {
+          ".validate": "newData.isString()"
+        },
+        "role": {
+          ".validate": "newData.val() === 'user' || newData.val() === 'admin'"
+        },
+        "subscription_status": {
+          ".validate": "newData.val() === 'trial' || newData.val() === 'active' || newData.val() === 'expired' || newData.val() === 'cancelled'"
+        },
+        "is_blocked": {
+          ".validate": "newData.isBoolean()"
+        },
+        "bot_status": {
+          ".validate": "newData.val() === 'stopped' || newData.val() === 'running' || newData.val() === 'error'"
+        },
+        "encrypted_api_key": {
+          ".validate": "newData.isString() || newData.val() === null"
+        },
+        "encrypted_api_secret": {
+          ".validate": "newData.isString() || newData.val() === null"
+        },
+        "is_testnet": {
+          ".validate": "newData.isBoolean()"
+        },
+        "total_trades": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "winning_trades": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "losing_trades": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "total_pnl": {
+          ".validate": "newData.isNumber()"
+        },
+        "bot_order_size_usdt": {
+          ".validate": "newData.isNumber() && newData.val() >= 10 && newData.val() <= 1000"
+        },
+        "bot_leverage": {
+          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 20"
+        },
+        "bot_stop_loss_percent": {
+          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 10"
+        },
+        "bot_take_profit_percent": {
+          ".validate": "newData.isNumber() && newData.val() >= 2 && newData.val() <= 20"
+        },
+        "bot_timeframe": {
+          ".validate": "newData.val() === '1m' || newData.val() === '5m' || newData.val() === '15m' || newData.val() === '1h' || newData.val() === '4h'"
+        },
+        "$other": {
+          ".validate": true
+        }
+      }
+    },
+    
+    "trades": {
+      "$uid": {
+        ".read": "$uid === auth.uid || root.child('users').child(auth.uid).child('role').val() === 'admin'",
+        ".write": "$uid === auth.uid || root.child('users').child(auth.uid).child('role').val() === 'admin'",
+        
+        "$trade_id": {
+          ".validate": "newData.hasChildren(['trade_id', 'user_id', 'symbol', 'side'])",
+          
+          "trade_id": {
+            ".validate": "newData.isString()"
+          },
+          "user_id": {
+            ".validate": "newData.isString() && newData.val() === $uid"
+          },
+          "symbol": {
+            ".validate": "newData.isString()"
+          },
+          "side": {
+            ".validate": "newData.val() === 'LONG' || newData.val() === 'SHORT'"
+          },
+          "entry_price": {
+            ".validate": "newData.isNumber() && newData.val() > 0"
+          },
+          "exit_price": {
+            ".validate": "newData.isNumber() && newData.val() > 0 || newData.val() === null"
+          },
+          "quantity": {
+            ".validate": "newData.isNumber() && newData.val() > 0"
+          },
+          "pnl": {
+            ".validate": "newData.isNumber()"
+          },
+          "status": {
+            ".validate": "newData.val() === 'OPEN' || newData.val() === 'CLOSED' || newData.val() === 'CANCELLED'"
+          },
+          "close_reason": {
+            ".validate": "newData.isString()"
+          },
+          "$other": {
+            ".validate": true
+          }
+        }
+      }
+    },
+    
+    "payments": {
+      ".read": "root.child('users').child(auth.uid).child('role').val() === 'admin'",
+      ".write": "auth != null",
+      
+      "$payment_id": {
+        ".validate": "newData.hasChildren(['payment_id', 'user_id', 'amount', 'status'])",
+        
+        "payment_id": {
+          ".validate": "newData.isString()"
+        },
+        "user_id": {
+          ".validate": "newData.isString() && (newData.val() === auth.uid || root.child('users').child(auth.uid).child('role').val() === 'admin')"
+        },
+        "amount": {
+          ".validate": "newData.isNumber() && newData.val() > 0"
+        },
+        "currency": {
+          ".validate": "newData.val() === 'USDT'"
+        },
+        "status": {
+          ".validate": "newData.val() === 'pending' || newData.val() === 'approved' || newData.val() === 'rejected'"
+        },
+        "transaction_hash": {
+          ".validate": "newData.isString() || newData.val() === null"
+        },
+        "message": {
+          ".validate": "newData.isString() || newData.val() === null"
+        },
+        "processed_by": {
+          ".validate": "newData.isString() || newData.val() === null"
+        },
+        "$other": {
+          ".validate": true
+        }
+      }
+    },
+    
+    "ip_whitelist": {
+      ".read": "root.child('users').child(auth.uid).child('role').val() === 'admin' || auth != null",
+      ".write": "root.child('users').child(auth.uid).child('role').val() === 'admin'",
+      
+      "$ip_key": {
+        ".validate": "newData.hasChildren(['ip_address', 'description', 'is_active'])",
+        
+        "ip_address": {
+          ".validate": "newData.isString() && newData.val().matches(/^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$/)"
+        },
+        "description": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "is_active": {
+          ".validate": "newData.isBoolean()"
+        },
+        "created_by": {
+          ".validate": "newData.isString()"
+        },
+        "$other": {
+          ".validate": true
+        }
+      }
+    }
+  }
+}

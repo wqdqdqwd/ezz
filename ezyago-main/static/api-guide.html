@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance API Rehberi - Ezyago</title>
+    <meta name="description" content="Binance API anahtarı nasıl alınır? Adım adım rehber ile güvenli API kurulumu.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/main.css">
+    
+    <style>
+        .guide-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+        }
+        
+        .guide-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .step {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-weight: 600;
+            margin-right: var(--spacing-md);
+        }
+        
+        .step-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+        }
+        
+        .warning-box {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .success-box {
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .code-block {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-family: 'Monaco', 'Menlo', monospace;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="guide-container">
+        <div class="guide-header">
+            <h1>Binance API Anahtarı Nasıl Alınır?</h1>
+            <p>Ezyago botunuzu kullanmak için Binance API anahtarı almanız gerekiyor. Bu rehber size adım adım yol gösterecek.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">1</span>
+                Binance Hesabınıza Giriş Yapın
+            </div>
+            <p>
+                <a href="https://www.binance.com" target="_blank" rel="noopener">Binance.com</a> adresine gidin ve hesabınıza giriş yapın.
+                Eğer hesabınız yoksa, önce bir hesap oluşturmanız gerekiyor.
+            </p>
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Önemli:</strong> Futures işlemleri için hesabınızda KYC (kimlik doğrulama) tamamlanmış olmalıdır.
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">2</span>
+                API Management Sayfasına Gidin
+            </div>
+            <p>Sağ üst köşedeki profil simgenize tıklayın ve <strong>"API Management"</strong> seçeneğini seçin.</p>
+            <p>Alternatif olarak doğrudan şu linke tıklayabilirsiniz: 
+                <a href="https://www.binance.com/en/my/settings/api-management" target="_blank" rel="noopener">
+                    API Management
+                </a>
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">3</span>
+                Yeni API Anahtarı Oluşturun
+            </div>
+            <p><strong>"Create API"</strong> butonuna tıklayın.</p>
+            <p>API anahtarınız için bir isim girin (örn: "Ezyago Bot").</p>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">4</span>
+                İzinleri Ayarlayın
+            </div>
+            <p>API anahtarınız için aşağıdaki izinleri seçin:</p>
+            <ul>
+                <li>✅ <strong>Enable Futures</strong> - Futures işlemleri için gerekli</li>
+                <li>❌ <strong>Enable Spot & Margin Trading</strong> - Gerekli değil</li>
+                <li>❌ <strong>Enable Withdrawals</strong> - GÜVENLİK İÇİN ASLA SEÇMEYİN!</li>
+            </ul>
+            <div class="warning-box">
+                <i class="fas fa-shield-alt"></i>
+                <strong>Güvenlik Uyarısı:</strong> "Enable Withdrawals" seçeneğini asla işaretlemeyin! 
+                Bu, hesabınızdan para çekilmesine izin verir.
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">5</span>
+                IP Beyaz Listesi Ekleyin (Önerilen)
+            </div>
+            <p>Ekstra güvenlik için aşağıdaki IP adreslerini beyaz listeye ekleyin:</p>
+            <div class="code-block">
+216.24.57.1<br>
+216.24.57.4
+            </div>
+            <p>Bu IP adreslerini "Restrict access to trusted IPs only" bölümüne ekleyin.</p>
+            <div class="success-box">
+                <i class="fas fa-check-circle"></i>
+                <strong>Güvenlik Artışı:</strong> IP kısıtlaması ile API anahtarınız sadece Ezyago sunucularından kullanılabilir.
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">6</span>
+                API Anahtarlarını Kopyalayın
+            </div>
+            <p>API anahtarı oluşturulduktan sonra:</p>
+            <ul>
+                <li><strong>API Key</strong> - Bu anahtarı kopyalayın</li>
+                <li><strong>Secret Key</strong> - Bu anahtarı da kopyalayın (sadece bir kez gösterilir!)</li>
+            </ul>
+            <div class="warning-box">
+                <i class="fas fa-eye-slash"></i>
+                <strong>Dikkat:</strong> Secret Key sadece bir kez gösterilir. Mutlaka güvenli bir yere kaydedin!
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">7</span>
+                Ezyago'ya Anahtarları Ekleyin
+            </div>
+            <p>Ezyago panelindeki "API Anahtarları" bölümüne gidin ve:</p>
+            <ul>
+                <li>API Key alanına kopyaladığınız anahtarı yapıştırın</li>
+                <li>API Secret alanına secret anahtarını yapıştırın</li>
+                <li>"Kaydet" butonuna tıklayın</li>
+            </ul>
+            <div class="success-box">
+                <i class="fas fa-rocket"></i>
+                <strong>Tebrikler!</strong> Artık botunuzu başlatabilirsiniz!
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: var(--spacing-2xl);">
+            <a href="/" class="btn btn-primary btn-large">
+                <i class="fas fa-arrow-left"></i>
+                Ana Sayfaya Dön
+            </a>
+        </div>
+    </div>
+</body>
+</html>

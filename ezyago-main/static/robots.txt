@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ezyago.com/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /admin
+Disallow: /api/
+Disallow: /.env
+Disallow: /src/
+
+# Allow important pages
+Allow: /
+Allow: /api-guide
+Allow: /about
+Allow: /privacy
+Allow: /terms
+Allow: /risk

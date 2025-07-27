@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezyago - Akıllı Kripto Trading Botu</title>
+    <meta name="description" content="7/24 otomatik kripto trading botu. Binance Futures'da akıllı algoritmalarla güvenli ve karlı işlemler. 7 gün ücretsiz deneme!">
+    <meta name="keywords" content="kripto bot, trading bot, binance bot, otomatik trading, kripto para">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Ezyago - Akıllı Kripto Trading Botu">
+    <meta property="og:description" content="7/24 otomatik kripto trading botu. 7 gün ücretsiz deneme!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ezyago.com">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/main.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Ezyago yükleniyor...</p>
+        </div>
+    </div>
+
+    <!-- Landing Page -->
+    <div id="landing-page">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="/" class="nav-brand">
+                    <i class="fas fa-robot"></i>
+                    <span>Ezyago</span>
+                </a>
+                
+                <div class="nav-menu">
+                    <a href="#features" class="nav-link">Özellikler</a>
+                    <a href="#pricing" class="nav-link">Fiyatlandırma</a>
+                    <a href="#faq" class="nav-link">SSS</a>
+                    <a href="/about" class="nav-link">Hakkımızda</a>
+                    <a href="/contact" class="nav-link">İletişim</a>
+                    <button class="btn btn-outline" onclick="showLoginModal()">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Giriş Yap
+                    </button>
+                    <button class="btn btn-primary" onclick="showRegisterModal()">
+                        <i class="fas fa-user-plus"></i>
+                        Ücretsiz Başla
+                    </button>
+                </div>
+                
+                <button class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="gradient-text">Akıllı Kripto Trading</span><br>
+                        Botunuz 7/24 Çalışsın
+                    </h1>
+                    <p class="hero-subtitle">
+                        Ezyago'nun tescilli algoritması ile Binance Futures'da otomatik işlem yapın. 
+                        Duygusal kararlardan kurtulun, disiplinli trading yapın.
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">7/24</span>
+                            <span class="stat-label">Otomatik İşlem</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">7 Gün</span>
+                            <span class="stat-label">Ücretsiz Deneme</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">$10</span>
+                            <span class="stat-label">Aylık Ücret</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-large" onclick="showRegisterModal()">
+                            <i class="fas fa-rocket"></i>
+                            7 Gün Ücretsiz Başla
+                        </button>
+                        <button class="btn btn-outline btn-large" onclick="scrollToFeatures()">
+                            <i class="fas fa-info-circle"></i>
+                            Nasıl Çalışır?
+                        </button>
+                    </div>
+                    
+                    <div class="hero-notice">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>API anahtarlarınız güvenli şekilde şifrelenir. Para çekme yetkisi asla istenmez.</span>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="trading-card">
+                        <div class="trading-header">
+                            <div class="trading-symbol">BTCUSDT</div>
+                            <div class="trading-status active">
+                                <i class="fas fa-circle"></i>
+                                <span>Aktif</span>
+                            </div>
+                        </div>
+                        
+                        <div class="trading-chart">
+                            <canvas id="demo-chart" width="300" height="150"></canvas>
+                        </div>
+                        
+                        <div class="trading-stats">
+                            <div class="stat-item">
+                                <span class="label">Toplam İşlem</span>
+                                <span class="value">247</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="label">Başarı Oranı</span>
+                                <span class="value success">68%</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="label">Toplam Kâr</span>
+                                <span class="value profit">+$1,247</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Neden Ezyago?</h2>
+                    <p>Profesyonel trading deneyimi için ihtiyacınız olan her şey</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Akıllı Algoritma</h3>
+                        <p>Tescilli "Ezyago Akıllı Algoritması" piyasa verilerini analiz ederek en uygun alım-satım kararlarını verir.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>7/24 Otomatik</h3>
+                        <p>Bot hiç durmadan çalışır. Siz uyurken bile piyasa fırsatlarını değerlendirir ve işlem yapar.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Güvenli Altyapı</h3>
+                        <p>API anahtarlarınız güçlü şifreleme ile korunur. Para çekme yetkisi asla istenmez.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Risk Yönetimi</h3>
+                        <p>Otomatik stop-loss ve take-profit seviyeleri ile riskinizi kontrol altında tutun.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobil Uyumlu</h3>
+                        <p>Telefonunuzdan botunuzu kontrol edin, işlemlerinizi takip edin, ayarlarınızı değiştirin.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>7/24 Destek</h3>
+                        <p>Herhangi bir sorunuzda e-posta ile 24 saat içinde yanıt alın.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Basit ve Şeffaf Fiyatlandırma</h2>
+                    <p>Gizli ücret yok, net fiyatlandırma</p>
+                </div>
+                
+                <div class="pricing-cards">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Deneme Süresi</h3>
+                        </div>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">0</span>
+                            <span class="period">/ 7 gün</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Tüm özellikler dahil</li>
+                            <li><i class="fas fa-check"></i> Sınırsız işlem</li>
+                            <li><i class="fas fa-check"></i> 7/24 bot çalışması</li>
+                            <li><i class="fas fa-check"></i> E-posta desteği</li>
+                        </ul>
+                        <button class="btn btn-outline btn-full" onclick="showRegisterModal()">
+                            <i class="fas fa-gift"></i>
+                            Ücretsiz Başla
+                        </button>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">En Popüler</div>
+                        <div class="pricing-header">
+                            <h3>Premium</h3>
+                        </div>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">10</span>
+                            <span class="period">/ ay</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Tüm özellikler dahil</li>
+                            <li><i class="fas fa-check"></i> Sınırsız işlem</li>
+                            <li><i class="fas fa-check"></i> 7/24 bot çalışması</li>
+                            <li><i class="fas fa-check"></i> Öncelikli destek</li>
+                            <li><i class="fas fa-check"></i> Gelişmiş istatistikler</li>
+                        </ul>
+                        <button class="btn btn-primary btn-full" onclick="showRegisterModal()">
+                            <i class="fas fa-crown"></i>
+                            Premium'a Başla
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Sıkça Sorulan Sorular</h2>
+                    <p>Merak ettiklerinizin yanıtları</p>
+                </div>
+                
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Ezyago nasıl çalışır?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ezyago, Binance API'nizi kullanarak hesabınıza bağlanır ve tescilli algoritmamız ile piyasa verilerini analiz ederek otomatik alım-satım işlemleri yapar. Siz sadece botunuzu başlatır ve takip edersiniz.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>API anahtarlarım güvenli mi?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Evet, API anahtarlarınız güçlü şifreleme ile korunur ve sadece işlem yapmak için kullanılır. Para çekme yetkisi asla istenmez ve anahtarlarınız güvenli sunucularda saklanır.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Minimum yatırım tutarı nedir?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Minimum yatırım tutarı yoktur, ancak etkili işlemler için en az 100 USDT önerilir. Bot ayarlarından işlem büyüklüğünü kendiniz belirleyebilirsiniz.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Hangi kripto paralarla çalışır?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Binance Futures'da işlem gören tüm USDT pariteli kripto paralarla çalışır. BTCUSDT, ETHUSDT, ADAUSDT gibi popüler pariteler desteklenir.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Kâr garantisi var mı?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Hayır, kripto piyasaları risklidir ve kâr garantisi veremeyiz. Botumuz disiplinli trading yapar ancak piyasa koşullarına bağlı olarak zarar da mümkündür. Lütfen risk bildirimini okuyun.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Nasıl ödeme yaparım?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ödemeler USDT ile yapılır. Belirtilen cüzdan adresine 10 USDT gönderdikten sonra sistem üzerinden ödeme bildirimi yapmanız yeterlidir. 24 saat içinde aboneliğiniz aktif edilir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <div class="brand">
+                            <i class="fas fa-robot"></i>
+                            <span>Ezyago</span>
+                        </div>
+                        <p>Akıllı kripto trading botu ile 7/24 otomatik işlem yapın. Duygusal kararlardan kurtulun, disiplinli trading yapın.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-section">
+                            <h4>Platform</h4>
+                            <a href="/about">Hakkımızda</a>
+                            <a href="/api-guide">API Rehberi</a>
+                            <a href="/contact">İletişim</a>
+                        </div>
+                        
+                        <div class="footer-section">
+                            <h4>Yasal</h4>
+                            <a href="/terms">Kullanım Koşulları</a>
+                            <a href="/privacy">Gizlilik Politikası</a>
+                            <a href="/risk">Risk Bildirimi</a>
+                        </div>
+                        
+                        <div class="footer-section">
+                            <h4>Destek</h4>
+                            <a href="/contact">Yardım Merkezi</a>
+                            <a href="mailto:bilwininc@gmail.com">E-posta Desteği</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Ezyago. Tüm hakları saklıdır. Bilwin Inc. ürünüdür.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard" style="display: none;">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <i class="fas fa-robot"></i>
+                    <span>Ezyago</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="overview">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Genel Bakış</span>
+                </a>
+                <a href="#" class="nav-item" data-page="bot">
+                    <i class="fas fa-robot"></i>
+                    <span>Bot Kontrolü</span>
+                </a>
+                <a href="#" class="nav-item" data-page="api-keys">
+                    <i class="fas fa-key"></i>
+                    <span>API Anahtarları</span>
+                </a>
+                <a href="#" class="nav-item" data-page="subscription">
+                    <i class="fas fa-crown"></i>
+                    <span>Abonelik</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Ayarlar</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <h1 id="page-title">Genel Bakış</h1>
+            </header>
+
+            <div class="dashboard-content">
+                <div id="overview-page" class="page active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="total-trades">0</h3>
+                                <p>Toplam İşlem</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="win-rate">0%</h3>
+                                <p>Başarı Oranı</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="total-pnl">$0.00</h3>
+                                <p>Toplam P&L</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div id="status-indicator" class="status-indicator">
+                                    <div class="status-dot"></div>
+                                    <span class="status-text">Durduruldu</span>
+                                </div>
+                                <p>Bot Durumu</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Bot Bilgileri</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="bot-info">
+                                    <div class="info-item">
+                                        <span class="label">Durum:</span>
+                                        <span class="value" id="bot-status">Durduruldu</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="label">Sembol:</span>
+                                        <span class="value" id="current-symbol">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="label">Pozisyon:</span>
+                                        <span class="value" id="current-position">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="label">Son Sinyal:</span>
+                                        <span class="value" id="last-signal">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="label">Çalışma Süresi:</span>
+                                        <span class="value" id="uptime">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>İşlem İstatistikleri</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="stats-list">
+                                    <div class="stat-item">
+                                        <span class="label">Toplam İşlem:</span>
+                                        <span class="value" id="stats-total">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="label">Kazanan İşlem:</span>
+                                        <span class="value success" id="stats-winning">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="label">Kaybeden İşlem:</span>
+                                        <span class="value danger" id="stats-losing">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="label">Toplam Kâr:</span>
+                                        <span class="value success" id="stats-profit">$0.00</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="label">Toplam Zarar:</span>
+                                        <span class="value danger" id="stats-loss">$0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="bot-page" class="page">
+                    <div class="bot-control">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Bot Kontrolü</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="control-section">
+                                    <div class="form-group">
+                                        <label for="symbol-input">Trading Sembolü:</label>
+                                        <input type="text" id="symbol-input" class="form-input" placeholder="BTCUSDT" value="BTCUSDT">
+                                        <span class="form-help">Örnek: BTCUSDT, ETHUSDT, ADAUSDT</span>
+                                    </div>
+                                    
+                                    <div class="control-buttons">
+                                        <button id="start-bot-btn" class="btn btn-primary" onclick="startBot()">
+                                            <i class="fas fa-play"></i>
+                                            Bot Başlat
+                                        </button>
+                                        <button id="stop-bot-btn" class="btn btn-danger" onclick="stopBot()" disabled>
+                                            <i class="fas fa-stop"></i>
+                                            Bot Durdur
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bot-settings">
+                            <h4>Bot Ayarları</h4>
+                            <div class="settings-form">
+                                <div class="settings-row">
+                                    <div class="form-group">
+                                        <label for="order-size">İşlem Büyüklüğü (USDT):</label>
+                                        <input type="number" id="order-size" class="form-input" value="25" min="10" max="1000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="leverage">Kaldıraç:</label>
+                                        <input type="number" id="leverage" class="form-input" value="10" min="1" max="20">
+                                    </div>
+                                </div>
+                                
+                                <div class="settings-row">
+                                    <div class="form-group">
+                                        <label for="stop-loss">Stop Loss (%):</label>
+                                        <input type="number" id="stop-loss" class="form-input" value="4" min="1" max="10" step="0.1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="take-profit">Take Profit (%):</label>
+                                        <input type="number" id="take-profit" class="form-input" value="8" min="2" max="20" step="0.1">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="timeframe">Zaman Dilimi:</label>
+                                    <select id="timeframe" class="form-input">
+                                        <option value="1m">1 Dakika</option>
+                                        <option value="5m">5 Dakika</option>
+                                        <option value="15m" selected>15 Dakika</option>
+                                        <option value="1h">1 Saat</option>
+                                        <option value="4h">4 Saat</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="settings-actions">
+                                    <button class="btn btn-primary" onclick="saveBotSettings()">
+                                        <i class="fas fa-save"></i>
+                                        Ayarları Kaydet
+                                    </button>
+                                    <button class="btn btn-outline" onclick="resetBotSettings()">
+                                        <i class="fas fa-undo"></i>
+                                        Varsayılana Döndür
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="api-keys-page" class="page">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Binance API Anahtarları</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="api-keys-form">
+                                <div class="form-group">
+                                    <label for="api-key">API Key:</label>
+                                    <input type="password" id="api-key" class="form-input" placeholder="Binance API Key'inizi girin">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="api-secret">API Secret:</label>
+                                    <input type="password" id="api-secret" class="form-input" placeholder="Binance API Secret'ınızı girin">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="is-testnet">
+                                        <span class="checkmark"></span>
+                                        <span>Testnet kullan (Demo hesap)</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="saveApiKeys()">
+                                        <i class="fas fa-save"></i>
+                                        API Anahtarlarını Kaydet
+                                    </button>
+                                    <button class="btn btn-danger" onclick="deleteApiKeys()">
+                                        <i class="fas fa-trash"></i>
+                                        Anahtarları Sil
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="api-help">
+                                <h4>API Anahtarı Nasıl Alınır?</h4>
+                                <ol>
+                                    <li>Binance hesabınıza giriş yapın</li>
+                                    <li>API Management sayfasına gidin</li>
+                                    <li>Yeni API anahtarı oluşturun</li>
+                                    <li>Sadece "Enable Futures" seçeneğini işaretleyin</li>
+                                    <li>Bu Ip adreslerini Binance hesabınıza tek tek ekleyin</li>
+                                    <li>18.156.158.53</li>
+                                    <li>18.156.42.200</li>
+                                    <li>52.59.103.54</li>
+                                    <li>API Key ve Secret'ı buraya yapıştırın</li>
+                                </ol>
+                                
+                                <div class="security-note">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span><strong>Güvenlik:</strong> "Enable Withdrawals" seçeneğini asla işaretlemeyin! API anahtarlarınız güvenli şekilde şifrelenir.</span>
+                                </div>
+                                
+                                <div class="api-guide-link">
+                                    <a href="/api-guide" target="_blank" class="btn btn-outline">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        Detaylı API Rehberi
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="subscription-page" class="page">
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Abonelik Durumu</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="subscription-status">
+                                    <div class="status-badge">
+                                        <i class="fas fa-crown"></i>
+                                        <span id="subscription-status">Deneme Süresi</span>
+                                    </div>
+                                    
+                                    <div class="status-details">
+                                        <div class="detail-item">
+                                            <span class="label">Kalan Süre:</span>
+                                            <span class="value" id="remaining-time">7 gün</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="label">Bitiş Tarihi:</span>
+                                            <span class="value" id="end-date">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Ödeme Bilgileri</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="payment-info">
+                                    <div class="price-display">
+                                        <span class="currency">$</span>
+                                        <span class="amount">10</span>
+                                        <span class="period">/ ay</span>
+                                    </div>
+                                    
+                                    <div class="payment-details">
+                                        <div class="form-group">
+                                            <label for="wallet-address">TRC20 USDT Cüzdan Adresi:</label>
+                                            <div class="wallet-address">
+                                                <input type="text" id="wallet-address" class="form-input" readonly>
+                                                <button class="btn btn-outline" onclick="copyWalletAddress()">
+                                                    <i class="fas fa-copy"></i>
+                                                    Kopyala
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="payment-actions">
+                                        <button class="btn btn-primary btn-full" onclick="requestPayment()">
+                                            <i class="fas fa-credit-card"></i>
+                                            Ödeme Yaptım
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="payment-note">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>Ödeme işlemini tamamladıktan sonra;
+
+E-posta adresimize "EZYAGO ÖDEME" yazınız,
+
+Ödeme yaptığınıza dair ekran görüntüsünü ve
+
+Kayıtlı e-posta adresinizi mutlaka ekleyerek gönderiniz.
+
+Gönderdiğiniz bilgiler kontrol edildikten sonra, 24 saat içinde aboneliğiniz aktif edilecektir.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings-page" class="page">
+                    <div class="settings-container">
+                        <div class="settings-card">
+                            <h3>Profil Ayarları</h3>
+
+                            <div class="user-info" style="margin-bottom: 2rem; padding: 1rem; background-color: var(--bg-secondary); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                                <div class="user-avatar" style="margin-right: 1rem;">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="user-details">
+                                    <span class="user-name" id="user-name">Kullanıcı</span>
+                                    <span class="user-email" id="user-email">user@example.com</span>
+                                </div>
+                            </div>
+
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <label for="full-name">Ad Soyad:</label>
+                                    <input type="text" id="full-name" class="form-input">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">E-posta:</label>
+                                    <input type="email" id="email" class="form-input" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="language">Dil:</label>
+                                    <select id="language" class="form-input">
+                                        <option value="tr">Türkçe</option>
+                                        <option value="en">English</option>
+                                    </select>
+                                </div>
+                                
+                                <button class="btn btn-primary" onclick="updateProfile()">
+                                    <i class="fas fa-save"></i>
+                                    Profili Güncelle
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="danger-zone">
+                            <h4>Tehlikeli Bölge</h4>
+                            <p>Bu işlemler geri alınamaz. Dikkatli olun.</p>
+                            <button class="btn btn-danger" onclick="deleteAccount()">
+                                <i class="fas fa-trash"></i>
+                                Hesabı Sil
+                            </button>
+
+                            <button class="btn btn-outline" onclick="logout()" style="border-color: var(--danger-color); color: var(--danger-color); margin-top: 1rem; width: 100%;">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Çıkış Yap
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Giriş Yap</h3>
+                <button class="modal-close" onclick="closeModal('login-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">E-posta:</label>
+                        <input type="email" id="login-email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Şifre:</label>
+                        <input type="password" id="login-password" class="form-input" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Giriş Yap
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Hesabınız yok mu? <a href="#" onclick="closeModal('login-modal'); showRegisterModal();">Kayıt olun</a></p>
+                <p><a href="#" onclick="showForgotPasswordModal()">Şifremi unuttum</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Hesap Oluştur</h3>
+                <button class="modal-close" onclick="closeModal('register-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-name">Ad Soyad:</label>
+                        <input type="text" id="register-name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">E-posta:</label>
+                        <input type="email" id="register-email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">Şifre:</label>
+                        <input type="password" id="register-password" class="form-input" required>
+                        <span class="form-help">En az 6 karakter</span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-user-plus"></i>
+                        Hesap Oluştur
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Zaten hesabınız var mı? <a href="#" onclick="closeModal('register-modal'); showLoginModal();">Giriş yapın</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Şifre Sıfırla</h3>
+                <button class="modal-close" onclick="closeModal('forgot-password-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="forgot-password-form">
+                    <div class="form-group">
+                        <label for="forgot-email">E-posta:</label>
+                        <input type="email" id="forgot-email" class="form-input" required>
+                        <span class="form-help">Şifre sıfırlama bağlantısı gönderilecek</span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i>
+                        Sıfırlama Bağlantısı Gönder
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p><a href="#" onclick="closeModal('forgot-password-modal'); showLoginModal();">Giriş sayfasına dön</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
